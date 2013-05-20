@@ -96,7 +96,7 @@
                     type: 'column',
                     name: 'Uncatagorized',
                     data: <%=@expense_by_category_and_month['Uncatagorized']%>
-                },
+                }
             ]
         });
     });
@@ -107,13 +107,14 @@
    <h3>Expense Details</h3>
    <br/>
    <div id="expenses_table_container">
-<table id="expenses" class="display">
+  <table id="expenses" class="display">
   <thead>
       <tr>
         <th>Date</th>
         <th>Description</th>
         <th>Category</th>
         <th>Amount</th>
+        <th></th>
       </tr>
   </thead>
     <tbody>
@@ -123,18 +124,16 @@
             <td><%= expense.description %></td>
             <td><%= expense.category %></td>
             <td><%= expense.amount.format %></td>
-            <!--<td><%= link_to 'Edit', edit_expense_path(expense) %></td>-->
-            <!--<td><%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-          <!--</tr>-->
+            <td><%= link_to 'Edit', edit_expense_path(expense) %> | <%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Delete #' + expense.id.to_s + '. Are you sure?' } %></td>
+          </tr>
         <% end %>
     </tbody>
 </table>
 
 <br />
-
 <%= link_to 'New Expense', new_expense_path %>
 </div>
- </div>
+</div>
 <%#= form_tag import_expenses_path, multipart: true do %>
     <%#= file_field_tag :file %>
     <%#= submit_tag "Import" %>
