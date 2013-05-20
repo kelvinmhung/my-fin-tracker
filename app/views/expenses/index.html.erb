@@ -1,7 +1,6 @@
-<h1>My expenses</h1>
-
+<h3>Expense Overview</h3>
+ <div id="parent">
 <div id="expense-chart-container" class="chart-container" style="width:100%; height:400px;"></div>
-
 <script type="text/javascript" charset="utf-8">
     $(function() {
         new Highcharts.Chart({
@@ -9,7 +8,7 @@
                 renderTo: 'expense-chart-container'
             },
             title: {
-                text: 'My expense'
+                text: 'Expense Overview'
             },
             xAxis: {
                 type: "datetime",
@@ -102,7 +101,12 @@
         });
     });
 </script>
-
+   <br/>
+   <br/>
+   <hr HR SIZE="5" NOSHADE/>
+   <h3>Expense Details</h3>
+   <br/>
+   <div id="expenses_table_container">
 <table id="expenses" class="display">
   <thead>
       <tr>
@@ -129,6 +133,8 @@
 <br />
 
 <%= link_to 'New Expense', new_expense_path %>
+</div>
+ </div>
 <%#= form_tag import_expenses_path, multipart: true do %>
     <%#= file_field_tag :file %>
     <%#= submit_tag "Import" %>
