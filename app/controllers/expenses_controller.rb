@@ -173,11 +173,16 @@ class ExpensesController < ApplicationController
   end
 
   def import
+
+  end
+
+
+  def import_file
     infile = params[:file].read
-      n=0
-      hdr=nil
-      CSV.parse(infile) do |row|
-        begin
+    n=0
+    hdr=nil
+    CSV.parse(infile) do |row|
+      begin
         n+=1
         if n==1
           hdr = row
@@ -189,14 +194,19 @@ class ExpensesController < ApplicationController
           row[0] = local_dt.iso8601
           record = Hash[[hdr, row].transpose]
           if not record.nil?
-           @expense = current_user.expenses.build(record)
-           @expense.save!
+            @expense = current_user.expenses.build(record)
+            @expense.save!
           end
 
         end
-        rescue
-          puts   "#{$!}"
-        end
+      rescue
+        puts   "#{$!}"
       end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to expenses_url,notice: 'File imported.' }
+      format.json { head :no_content }
+    end
   end
 end

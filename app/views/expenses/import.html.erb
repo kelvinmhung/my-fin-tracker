@@ -1,8 +1,36 @@
-<h1>New expense</h1>
-
-<%= form_tag import_expenses_path, :multipart => true do %>
+<h3>Import expense file (.csv)</h3>
+The expense file must be in this format:
+<br />
+<br />
+<table>
+  <tr>
+    <th>date,</th>
+    <th>description,</th>
+    <th>category,</th>
+    <th>amount</th>
+  </tr>
+</table>
+<br />
+where
+<br />
+<pre>
+  date:         mm/dd/yyyy
+  description:  activity/service description
+  category:     must be one of the following "Bills & Utilities", "Food & Dining", "Entertainment", "Health & Fitness",
+                "Shopping", "Kids", "Pet", "Home", "Uncatagorized"
+  amount:       dollar amount of the activity/service
+</pre>
+Sample
+<pre>
+date,description,category,amount
+1/5/2013,Gas,Auto & Transport,$50.20
+2/4/2013,MacDonalds,Food & Dining,$30.44
+</pre>
+<br/>
+<span></span>
+<%= form_tag "import_file", :multipart => true do %>
     <%= file_field_tag :file %>
-    <%= submit_tag "Import Expense File (.csv,.xls,.xlsx)" %>
+    <%= submit_tag "Import" %>
 <% end %>
 
 <%= link_to 'Back', expenses_path %>
